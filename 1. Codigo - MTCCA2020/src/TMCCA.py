@@ -25,7 +25,7 @@ class TMCCA:
         self.main.title("Laboratorio 2 - CCA2020")
         self.main.geometry(DIMENSIONS)
 
-        ### RIGHT FRAME: EDITOR
+
         self.frameEditor = tk.Frame(self.main)
         self.labelEditor = tk.Label(self.frameEditor, text="Editor")
         self.labelEditor.grid(row=0, column=1)
@@ -42,7 +42,7 @@ class TMCCA:
 
         default_resize(self.frameEditor)
 
-        ### LEFT FRAME: Simulator
+        
         self.frameSim = tk.Frame(self.main)
         self.labelSim = tk.Label(self.frameSim, text="Simulador de Máquina de Turing")
         self.labelSim.grid(row=0, column=0, columnspan=3)
@@ -62,23 +62,23 @@ class TMCCA:
         self.tabsSim.add(self.frameText, text='  Texto  ')
         self.tabsSim.grid(row=2, column=0, columnspan=3)
 
-        # Check boxes
+        
         self.frameCheck = tk.Frame(self.frameSim)
         self.bidirectional = tk.BooleanVar()
         self.checkbox2Way = tk.Checkbutton(
-            self.frameCheck, text="Bidirecconal (Desmarcar para Unidireccional)", var=self.bidirectional, onvalue=True, offvalue=False)
+            self.frameCheck, text="MT", var=self.bidirectional, onvalue=True, offvalue=False)
         self.checkbox2Way.select()
         self.checkbox2Way.grid(row=0, sticky='w')
         self.two_tape = tk.BooleanVar()
         self.checkbox2Tape = tk.Checkbutton(
-            self.frameCheck, text="Doble Cinta", var=self.two_tape, onvalue=True, offvalue=False)
+            self.frameCheck, text="DC", var=self.two_tape, onvalue=True, offvalue=False)
         self.checkbox2Tape.grid(row=1, sticky='w')
         self.two_tape.trace("w", self.setTwoTape)
         self.bidirectional.trace("w", self.setBidirectional)
         self.frameCheck.grid(row=3, column=2)
 
 
-        # Controls
+        # Controles
         self.frameRun = tk.Frame(self.frameSim)
         self.buttonRun = tk.Button(self.frameRun, width=10, relief='raised', text="Correr", command=self.runTM)
         self.buttonRun.grid(row=0, column=0, pady=5, padx=5)
@@ -95,12 +95,12 @@ class TMCCA:
         self.frameRun.grid(row=3, column=0)
 
 
-        # Tape frame
+      
         self.canvasSimOut = tk.Canvas(self.frameTape, bg="#c2c2c2", width=852, height=500)
         self.drawFirstTape()
         self.canvasSimOut.pack(expand=1, fill='both')
 
-        # Text Frame
+   
         self.textSimOut = scrolledtext.ScrolledText(self.frameText, state='disabled', height=10, width=55, wrap=tk.WORD)
         self.textSimOut.pack(expand=1, fill='both')
 
@@ -112,7 +112,7 @@ class TMCCA:
         ### Seperate the two sides
         ttk.Separator(master, orient='vertical').grid(column=1, row=0, rowspan=21, sticky='nsew', padx=5)
 
-    # Editor Buttons
+
     def loadTM(self):
         """Cargamos una MT desde un archivo de especificación en el editor y el simulador"""
         tmFileName = filedialog.askopenfilename(
@@ -149,7 +149,7 @@ class TMCCA:
             self.tm = turing_machine(tmFileName, input=self.textTapeInput.get(), bidirectional=self.bidirectional.get())
         self.resetTM()
 
-    # Simulator Buttons
+
     def runTM(self):
         """Ejecute ela el archivo continuamente y se pone en cola todas las actualizaciones para que se muestren (con retraso opcional)
         """
@@ -209,7 +209,7 @@ class TMCCA:
             self.tm.go_back_to_step(self.lastRunStep)
         self._jobs = []
 
-    # Callbacks
+   
     def setTape(self, *args):
         """Devolución de llamada para cuando se cambia la entrada de cinta.
         Informa al MT y reiniciar la ejecución.
@@ -332,7 +332,7 @@ class TMCCA:
                     self.canvasSimOut.create_text(50 * j + 27, starty + 175, text=text2, font="Times 20", tag='text')
 
     def writeOutText(self, config, step=None):
-        """Write out the given configuration of the machine in the text output."""
+        "" "Escriba la configuración dada de la máquina en la salida de texto." ""
         if step == None:
             step = self.tm.step
         self.lastRunStep = step
